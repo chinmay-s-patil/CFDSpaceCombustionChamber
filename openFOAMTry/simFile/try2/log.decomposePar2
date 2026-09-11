@@ -1,0 +1,158 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : decomposePar -force -time 600:
+Date   : Sep 10 2026
+Time   : 22:04:17
+Host   : indigo
+PID    : 319250
+I/O    : uncollated
+Case   : /home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+
+Decomposing mesh
+
+Create mesh
+
+Calculating distribution of cells
+Decomposition method scotch [8] (region region0)
+
+Finished decomposition in 0.56 s
+
+Calculating original mesh data
+
+Distributing cells to processors
+
+Distributing faces to processors
+
+Distributing points to processors
+
+Constructing processor meshes
+
+Processor 0
+    Number of cells = 27194
+    Number of points = 13377
+    Number of faces shared with processor 1 = 263
+    Number of faces shared with processor 2 = 777
+    Number of faces shared with processor 3 = 10
+    Number of faces shared with processor 4 = 74
+    Number of faces shared with processor 5 = 307
+    Number of processor patches = 5
+    Number of processor faces = 1431
+    Number of boundary faces = 3207
+
+Processor 1
+    Number of cells = 27685
+    Number of points = 12364
+    Number of faces shared with processor 0 = 263
+    Number of processor patches = 1
+    Number of processor faces = 263
+    Number of boundary faces = 2355
+
+Processor 2
+    Number of cells = 27179
+    Number of points = 13749
+    Number of faces shared with processor 0 = 777
+    Number of faces shared with processor 3 = 736
+    Number of processor patches = 2
+    Number of processor faces = 1513
+    Number of boundary faces = 2383
+
+Processor 3
+    Number of cells = 27183
+    Number of points = 12955
+    Number of faces shared with processor 0 = 10
+    Number of faces shared with processor 2 = 736
+    Number of faces shared with processor 4 = 42
+    Number of faces shared with processor 5 = 40
+    Number of processor patches = 4
+    Number of processor faces = 828
+    Number of boundary faces = 2850
+
+Processor 4
+    Number of cells = 27722
+    Number of points = 7946
+    Number of faces shared with processor 0 = 74
+    Number of faces shared with processor 3 = 42
+    Number of faces shared with processor 5 = 907
+    Number of faces shared with processor 6 = 689
+    Number of faces shared with processor 7 = 26
+    Number of processor patches = 5
+    Number of processor faces = 1738
+    Number of boundary faces = 1224
+
+Processor 5
+    Number of cells = 27292
+    Number of points = 10350
+    Number of faces shared with processor 0 = 307
+    Number of faces shared with processor 3 = 40
+    Number of faces shared with processor 4 = 907
+    Number of faces shared with processor 6 = 454
+    Number of faces shared with processor 7 = 88
+    Number of processor patches = 5
+    Number of processor faces = 1796
+    Number of boundary faces = 1828
+
+Processor 6
+    Number of cells = 27705
+    Number of points = 7463
+    Number of faces shared with processor 4 = 689
+    Number of faces shared with processor 5 = 454
+    Number of faces shared with processor 7 = 1082
+    Number of processor patches = 3
+    Number of processor faces = 2225
+    Number of boundary faces = 517
+
+Processor 7
+    Number of cells = 27661
+    Number of points = 8524
+    Number of faces shared with processor 4 = 26
+    Number of faces shared with processor 5 = 88
+    Number of faces shared with processor 6 = 1082
+    Number of processor patches = 3
+    Number of processor faces = 1196
+    Number of boundary faces = 960
+
+Number of processor faces = 5495
+Max number of cells = 27722 (0.98123586% above average 27452.625)
+Max number of processor patches = 5 (42.857143% above average 3.5)
+Max number of faces between processors = 2225 (61.965423% above average 1373.75)
+
+Time = 600
+Using dynamicCode for patch chamber_wall_up on field T at line 220730 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 222701 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 223826 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/T/boundaryField/chamber_wall_down"
+
+Processor 0: field transfer
+Detected additional non-decomposed files in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/uniform"
+Processor 1: field transfer
+Detected additional non-decomposed files in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/uniform"
+Processor 2: field transfer
+Detected additional non-decomposed files in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/uniform"
+Processor 3: field transfer
+Detected additional non-decomposed files in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/uniform"
+Processor 4: field transfer
+Detected additional non-decomposed files in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/uniform"
+Processor 5: field transfer
+Detected additional non-decomposed files in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/uniform"
+Processor 6: field transfer
+Detected additional non-decomposed files in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/uniform"
+Processor 7: field transfer
+Detected additional non-decomposed files in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/600/uniform"
+
+End
+

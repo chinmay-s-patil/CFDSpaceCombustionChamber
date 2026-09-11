@@ -1,0 +1,138 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : decomposePar -force
+Date   : Sep 10 2026
+Time   : 21:43:49
+Host   : indigo
+PID    : 314957
+I/O    : uncollated
+Case   : /home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+
+Decomposing mesh
+
+Create mesh
+
+Calculating distribution of cells
+Decomposition method scotch [8] (region region0)
+
+Finished decomposition in 0.55 s
+
+Calculating original mesh data
+
+Distributing cells to processors
+
+Distributing faces to processors
+
+Distributing points to processors
+
+Constructing processor meshes
+
+Processor 0
+    Number of cells = 27635
+    Number of points = 13124
+    Number of faces shared with processor 1 = 787
+    Number of faces shared with processor 4 = 94
+    Number of faces shared with processor 6 = 76
+    Number of processor patches = 3
+    Number of processor faces = 957
+    Number of boundary faces = 3014
+
+Processor 1
+    Number of cells = 27357
+    Number of points = 13824
+    Number of faces shared with processor 0 = 787
+    Number of faces shared with processor 2 = 733
+    Number of processor patches = 2
+    Number of processor faces = 1520
+    Number of boundary faces = 2386
+
+Processor 2
+    Number of cells = 27435
+    Number of points = 13802
+    Number of faces shared with processor 1 = 733
+    Number of processor patches = 1
+    Number of processor faces = 733
+    Number of boundary faces = 3018
+
+Processor 3
+    Number of cells = 27684
+    Number of points = 12350
+    Number of faces shared with processor 6 = 251
+    Number of processor patches = 1
+    Number of processor faces = 251
+    Number of boundary faces = 2351
+
+Processor 4
+    Number of cells = 27324
+    Number of points = 10061
+    Number of faces shared with processor 0 = 94
+    Number of faces shared with processor 5 = 1079
+    Number of processor patches = 2
+    Number of processor faces = 1173
+    Number of boundary faces = 1412
+
+Processor 5
+    Number of cells = 27411
+    Number of points = 7430
+    Number of faces shared with processor 4 = 1079
+    Number of faces shared with processor 7 = 1070
+    Number of processor patches = 2
+    Number of processor faces = 2149
+    Number of boundary faces = 537
+
+Processor 6
+    Number of cells = 27224
+    Number of points = 8403
+    Number of faces shared with processor 0 = 76
+    Number of faces shared with processor 3 = 251
+    Number of faces shared with processor 7 = 1087
+    Number of processor patches = 3
+    Number of processor faces = 1414
+    Number of boundary faces = 2036
+
+Processor 7
+    Number of cells = 27551
+    Number of points = 7494
+    Number of faces shared with processor 5 = 1070
+    Number of faces shared with processor 6 = 1087
+    Number of processor patches = 2
+    Number of processor faces = 2157
+    Number of boundary faces = 570
+
+Number of processor faces = 5177
+Max number of cells = 27684 (0.84281558% above average 27452.625)
+Max number of processor patches = 3 (50% above average 2)
+Max number of faces between processors = 2157 (66.660228% above average 1294.25)
+
+Time = 0
+Using dynamicCode for patch chamber_wall_up on field T at line 43 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/0/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 84 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/0/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 125 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/0/T/boundaryField/chamber_wall_down"
+
+Processor 0: field transfer
+Processor 1: field transfer
+Processor 2: field transfer
+Processor 3: field transfer
+Processor 4: field transfer
+Processor 5: field transfer
+Processor 6: field transfer
+Processor 7: field transfer
+
+End
+

@@ -1,0 +1,104 @@
+#!/bin/bash
+set -e
+
+# Always work inside the case directory
+cd "$(dirname "$0")"
+
+echo "======================================================="
+echo " Starting Automated OpenFOAM Methane/Oxygen Combustion "
+echo "======================================================="
+
+# If 600 directory doesn't exist, run full Phase 1 cold flow
+if [ ! -d "600" ]; then
+    echo "[Step 1/7] Cleaning old log files and time directories..."
+    rm -rf log.* [1-9]* processor*
+
+    echo "[Step 2/7] Configuring Phase 1 (Cold-Flow Pre-convergence for 600 steps)..."
+    python3 -c '
+with open("system/controlDict", "r") as f: content = f.read()
+import re
+content = re.sub(r"startFrom\s+\w+;", "startFrom       startTime;", content)
+content = re.sub(r"stopAt\s+\w+;", "stopAt          endTime;", content)
+content = re.sub(r"endTime\s+\d+;", "endTime         600;", content)
+content = re.sub(r"writeInterval\s+\d+;", "writeInterval   25;", content)
+content = re.sub(r"purgeWrite\s+\d+;", "purgeWrite      0;", content)
+with open("system/controlDict", "w") as f: f.write(content)
+'
+
+    python3 -c '
+with open("constant/chemistryProperties", "r") as f: content = f.read()
+import re
+content = re.sub(r"chemistry\s+\w+;", "chemistry       off;", content)
+with open("constant/chemistryProperties", "w") as f: f.write(content)
+'
+
+    python3 -c '
+with open("system/fvSolution", "r") as f: content = f.read()
+import re
+content = re.sub(r"\"h\.\*\"\s+[\d\.]+;", "\"h.*\"           0.001;", content)
+content = re.sub(r"maxCo\s+[\d\.]+;", "maxCo           0.8;", content)
+content = re.sub(r"maxDeltaT\s+[\d\.e\-]+;", "maxDeltaT       1.0;", content)
+content = re.sub(r"rDeltaTDampingCoeff\s+[\d\.]+;", "rDeltaTDampingCoeff 1.0;", content)
+with open("system/fvSolution", "w") as f: f.write(content)
+'
+
+    echo "[Step 3/7] Decomposing domain for 8 processors..."
+    rm -rf processor*
+    decomposePar -force > log.decomposePar 2>&1
+
+    echo "[Step 4/7] Running Phase 1 cold flow pre-convergence (600 steps, saving every 25)..."
+    mpirun -np 8 reactingFoam -parallel 2>&1 | tee -a log.phase1_coldflow
+
+    echo "[Step 5/7] Reconstructing all time steps (0-600) and applying ignition kernel..."
+    reconstructPar > log.reconstructPar 2>&1
+    topoSet -time 600 > log.topoSet 2>&1
+    setFields -time 600 > log.setFields 2>&1
+else
+    echo "Found time directory 600. Preserving pre-converged cold flow."
+fi
+
+# Ensure 600 is decomposed for processor*
+if [ ! -d "processor0/600" ]; then
+    echo "Decomposing domain from time 600..."
+    rm -rf processor*
+    decomposePar -force -time 600: > log.decomposePar2 2>&1
+    rm -f processor*/600/rDeltaT
+fi
+
+echo "[Step 6/7] Enabling chemistry and tuning parameters for Phase 2 combustion..."
+python3 -c '
+with open("system/controlDict", "r") as f: content = f.read()
+import re
+content = re.sub(r"startFrom\s+\w+;", "startFrom       latestTime;", content)
+content = re.sub(r"stopAt\s+\w+;", "stopAt          endTime;", content)
+content = re.sub(r"endTime\s+\d+;", "endTime         2000;", content)
+content = re.sub(r"writeInterval\s+\d+;", "writeInterval   25;", content)
+content = re.sub(r"purgeWrite\s+\d+;", "purgeWrite      0;", content)
+with open("system/controlDict", "w") as f: f.write(content)
+'
+
+python3 -c '
+with open("constant/chemistryProperties", "r") as f: content = f.read()
+import re
+content = re.sub(r"chemistry\s+\w+;", "chemistry       on;", content)
+content = re.sub(r"maxChemicalTimeStep\s+[\d\.e\-]+;", "maxChemicalTimeStep 1e-4;", content)
+content = re.sub(r"absTol\s+[\d\.e\-]+;", "absTol          1e-7;", content)
+content = re.sub(r"relTol\s+[\d\.e\-]+;", "relTol          1e-3;", content)
+with open("constant/chemistryProperties", "w") as f: f.write(content)
+'
+
+python3 -c '
+with open("system/fvSolution", "r") as f: content = f.read()
+import re
+content = re.sub(r"\"h\.\*\"\s+[\d\.]+;", "\"h.*\"           0.5;", content)
+content = re.sub(r"\"U\.\*\"\s+[\d\.]+;", "\"U.*\"           0.5;", content)
+content = re.sub(r"\"Yi\.\*\"\s+[\d\.]+;", "\"Yi.*\"          0.5;", content)
+content = re.sub(r"maxCo\s+[\d\.]+;", "maxCo           0.8;", content)
+content = re.sub(r"maxDeltaT\s+[\d\.e\-]+;", "maxDeltaT       1.0;", content)
+content = re.sub(r"rDeltaTDampingCoeff\s+[\d\.]+;", "rDeltaTDampingCoeff 0.5;", content)
+with open("system/fvSolution", "w") as f: f.write(content)
+'
+
+echo "[Step 7/7] Launching Phase 2 ignited combustion simulation..."
+mpirun -np 8 reactingFoam -parallel 2>&1 | tee -a log.phase2_combustion
+echo "Combustion simulation complete!"

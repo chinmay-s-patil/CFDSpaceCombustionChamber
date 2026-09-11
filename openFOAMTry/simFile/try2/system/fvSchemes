@@ -1,0 +1,83 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         localEuler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    grad(p)         Gauss linear;
+    grad(U)         cellLimited Gauss linear 1.0;
+    grad(k)         cellLimited Gauss linear 1.0;
+    grad(omega)     cellLimited Gauss linear 1.0;
+    grad(h)         cellLimited Gauss linear 1.0;
+}
+
+divSchemes
+{
+    default         Gauss upwind;
+    div(phi,U)      Gauss upwind;
+    div(phi,h)      Gauss upwind;
+    div(phi,e)      Gauss upwind;
+    div(phi,K)      Gauss upwind;
+    div(phi,k)      Gauss upwind;
+    div(phi,epsilon) Gauss upwind;
+    div(phi,omega)  Gauss upwind;
+    div(phi,Yi_h)   Gauss limitedLinear01 1.0;
+    div(phi,Yi)     Gauss limitedLinear01 1.0;
+    div(phi,O2)     Gauss limitedLinear01 1.0;
+    div(phi,CH4)    Gauss limitedLinear01 1.0;
+    div(phi,N2)     Gauss limitedLinear01 1.0;
+    div(phi,H2O)    Gauss limitedLinear01 1.0;
+    div(phi,CO2)    Gauss limitedLinear01 1.0;
+    div(phi,H2)     Gauss limitedLinear01 1.0;
+    div(phi,CO)     Gauss limitedLinear01 1.0;
+    div(phi,OH)     Gauss limitedLinear01 1.0;
+    div(phi,HO2)    Gauss limitedLinear01 1.0;
+    div(phi,H2O2)   Gauss limitedLinear01 1.0;
+    div(phi,CH3)    Gauss limitedLinear01 1.0;
+    div(phi,HCO)    Gauss limitedLinear01 1.0;
+    div(phi,CH2O)   Gauss limitedLinear01 1.0;
+    div(phi,AR)     Gauss limitedLinear01 1.0;
+    div(phid,p)     Gauss upwind;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+wallDist
+{
+    method          meshWave;
+}
+
+// ************************************************************************* //

@@ -1,0 +1,57 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    {
+        name    gch4Annulus;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        point1  (0 0 -0.030);
+        point2  (0 0 0.0001);
+        radius  0.00305;
+    }
+    {
+        name    goxCore;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        point1  (0 0 -0.030);
+        point2  (0 0 0.0001);
+        radius  0.0021;
+    }
+    {
+        name    gch4Annulus;
+        type    cellSet;
+        action  subset;
+        source  cellToCell;
+        set     goxCore;
+        invert  true;
+    }
+    {
+        name    ignitionKernel;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        point1  (0 0 0.000);
+        point2  (0 0 0.040);
+        radius  0.008;
+    }
+);
+
+// ************************************************************************* //

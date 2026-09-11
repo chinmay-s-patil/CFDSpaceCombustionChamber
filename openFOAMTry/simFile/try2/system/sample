@@ -1,0 +1,50 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      sample;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+type            sets;
+libs            ("libsampling.so");
+
+writeControl    writeTime;
+
+setFormat       raw;
+
+surfaceFormat   raw;
+
+fields          (T p U O2 CH4 H2O CO2 CO OH);
+
+sets
+(
+    centerline
+    {
+        type        uniform;
+        axis        z;
+        start       (0 0 0);
+        end         (0 0 0.33);
+        nPoints     200;
+    }
+
+    wall_up
+    {
+        type        uniform;
+        axis        z;
+        start       (0 0.0059 0);
+        end         (0 0.0059 0.33);
+        nPoints     200;
+    }
+);
+
+// ************************************************************************* //

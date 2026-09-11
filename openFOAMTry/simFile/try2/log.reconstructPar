@@ -1,0 +1,1208 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : reconstructPar
+Date   : Sep 10 2026
+Time   : 22:03:29
+Host   : indigo
+PID    : 319043
+I/O    : uncollated
+Case   : /home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+
+Reconstructing fields
+region=region0
+
+Time = 25
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+Using dynamicCode for patch chamber_wall_up on field T at line 27928 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor0/25/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 28307 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor0/25/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 28620 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor0/25/T/boundaryField/chamber_wall_down"
+Using dynamicCode for patch chamber_wall_up on field T at line 27404 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor1/25/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 27445 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor1/25/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 27486 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor1/25/T/boundaryField/chamber_wall_down"
+Using dynamicCode for patch chamber_wall_up on field T at line 27482 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor2/25/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 27523 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor2/25/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 27564 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor2/25/T/boundaryField/chamber_wall_down"
+Using dynamicCode for patch chamber_wall_up on field T at line 27731 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor3/25/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 27772 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor3/25/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 27813 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor3/25/T/boundaryField/chamber_wall_down"
+Using dynamicCode for patch chamber_wall_up on field T at line 27742 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor4/25/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 28506 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor4/25/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 28877 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor4/25/T/boundaryField/chamber_wall_down"
+Using dynamicCode for patch chamber_wall_up on field T at line 27582 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor5/25/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 27854 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor5/25/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 28089 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor5/25/T/boundaryField/chamber_wall_down"
+Using dynamicCode for patch chamber_wall_up on field T at line 27451 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor6/25/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 27816 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor6/25/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 28066 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor6/25/T/boundaryField/chamber_wall_down"
+Using dynamicCode for patch chamber_wall_up on field T at line 27755 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor7/25/T/boundaryField/chamber_wall_up"
+Using dynamicCode for patch chamber_wall_side on field T at line 28126 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor7/25/T/boundaryField/chamber_wall_side"
+Using dynamicCode for patch chamber_wall_down on field T at line 28262 in "/home/lavender/OpenFoamUbu/CFDSpaceCombustionChamber/openFOAMTry/simFile/try2/processor7/25/T/boundaryField/chamber_wall_down"
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 75
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 125
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 175
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 225
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 275
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 325
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 375
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 425
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 475
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 525
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 550
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 575
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 600
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        AR
+        CH2O
+        CH3
+        CH4
+        CO
+        CO2
+        H
+        H2
+        H2O
+        H2O2
+        HCO
+        HO2
+        N2
+        O
+        O2
+        OH
+        PaSR<psiReactionThermo>:kappa
+        Qdot
+        T
+        alphat
+        k
+        nut
+        omega
+        p
+        rDeltaT
+
+    Reconstructing volVectorFields
+
+        U
+
+    Reconstructing surfaceScalarFields
+
+        phi
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+End
+

@@ -1,0 +1,47 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      omega;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 -1 0 0 0 0];
+
+internalField   uniform 5000;
+
+boundaryField
+{
+    gox-inlet
+    {
+        type            turbulentMixingLengthFrequencyInlet;
+        mixingLength    0.001;
+        value           uniform 5000;
+    }
+    gch4-inlet
+    {
+        type            turbulentMixingLengthFrequencyInlet;
+        mixingLength    0.001;
+        value           uniform 5000;
+    }
+    outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform 5000;
+        value           uniform 5000;
+    }
+    "(post_wall|chamber_wall_up|chamber_wall_side|chamber_wall_down|gch4_inlet_outer_wall|face_plate)"
+    {
+        type            omegaWallFunction;
+        value           uniform 5000;
+    }
+}

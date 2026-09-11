@@ -1,0 +1,83 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+9
+(
+    gox-inlet
+    {
+        type            patch;
+        nFaces          253;
+        startFace       493535;
+    }
+    gch4-inlet
+    {
+        type            patch;
+        nFaces          627;
+        startFace       493788;
+    }
+    post_wall
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          5521;
+        startFace       494415;
+    }
+    chamber_wall_up
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          1058;
+        startFace       499936;
+    }
+    chamber_wall_side
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          1926;
+        startFace       500994;
+    }
+    chamber_wall_down
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          1080;
+        startFace       502920;
+    }
+    outlet
+    {
+        type            patch;
+        nFaces          230;
+        startFace       504000;
+    }
+    gch4_inlet_outer_wall
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          3686;
+        startFace       504230;
+    }
+    face_plate
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          943;
+        startFace       507916;
+    }
+)
+
+// ************************************************************************* //

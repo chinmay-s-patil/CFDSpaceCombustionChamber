@@ -19,9 +19,15 @@ ClaudeData/
 
 TUMCFDPr2026/
 
-openFOAMTry/
 
 Class Files/
 
 TUMCFDPr2026-20260903T045809Z-1-001.zip
 
+# openFOAMTry/
+
+simFile2/
+
+simFile/
+
+solver/

@@ -1,0 +1,11 @@
+Sensor					Name	Position	Type			Precision
+							Z**[mm]
+Pressure transducer		PC0		0,5			WIKA A 10		15 mbar
+Pressure transducer		PC1		34,5		WIKA A 10		15 mbar
+Pressure transducer		PC2		68,5		WIKA A 10		15 mbar
+Pressure transducer		PC3		102,5		WIKA A 10		15 mbar
+Pressure transducer		PC4		136,5		WIKA A 10		15 mbar
+Pressure transducer		PC5		170,5		WIKA A 10		15 mbar
+Pressure transducer		PC6		204,5		WIKA A 10		15 mbar
+Pressure transducer		PC7		238,5		WIKA A 10		15 mbar
+Pressure transducer		PC8		272,5		WIKA A 10		15 mbar

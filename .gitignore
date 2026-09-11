@@ -1,0 +1,27 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+processor*/
+
+Sims/
+
+AF/
+
+ClaudeData/
+
+TUMCFDPr2026/
+
+openFOAMTry/
+
+Class Files/
+
+TUMCFDPr2026-20260903T045809Z-1-001.zip
+

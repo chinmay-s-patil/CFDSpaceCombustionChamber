@@ -1,0 +1,533 @@
+\documentclass[11pt,a4paper]{article}
+
+% ==============================================================================
+% PACKAGES & DOCUMENT SETUP
+% ==============================================================================
+\usepackage[a4paper, margin=2.2cm, top=2.5cm, bottom=2.5cm, headheight=14.5pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{setspace}
+\setstretch{1.10}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage[most]{tcolorbox}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage{hyperref}
+
+% --- Color Palette (TUM Corporate Design Inspired) ---
+\definecolor{tumblue}{RGB}{0,101,189}
+\definecolor{tumdarkblue}{RGB}{0,82,147}
+\definecolor{tumgray}{RGB}{88,88,90}
+\definecolor{tumlightgray}{RGB}{246,247,250}
+\definecolor{accentborder}{RGB}{195,215,238}
+\definecolor{alertred}{RGB}{185,45,45}
+\definecolor{alertback}{RGB}{253,246,246}
+
+% --- Typography & Section Formatting ---
+\titleformat{\section}{\color{tumdarkblue}\normalfont\Large\bfseries}{\thesection}{0.8em}{}[{\titlerule[0.8pt]}]
+\titleformat{\subsection}{\color{tumblue}\normalfont\large\bfseries}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\color{tumdarkblue}\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+
+% --- Table Column Definitions ---
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+
+% --- Tcolorbox Environments ---
+\tcbuselibrary{skins,breakable}
+\tcbset{
+    basebox/.style={
+        colback=tumlightgray,
+        colframe=tumblue,
+        arc=2mm,
+        boxrule=0.7pt,
+        fonttitle=\bfseries\color{white},
+        coltitle=white,
+        colbacktitle=tumdarkblue,
+        boxsep=3pt,
+        left=8pt, right=8pt, top=6pt, bottom=6pt,
+        breakable
+    },
+    alertbox/.style={
+        colback=alertback,
+        colframe=alertred,
+        arc=2mm,
+        boxrule=0.8pt,
+        fonttitle=\bfseries\color{white},
+        coltitle=white,
+        colbacktitle=alertred,
+        boxsep=3pt,
+        left=8pt, right=8pt, top=6pt, bottom=6pt,
+        breakable
+    }
+}
+
+% --- Header & Footer (fancyhdr) ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\textsc{TUM / SFB-TR40} $\cdot$ Test Case 1: GCH\textsubscript{4}/GOX Chamber}
+\fancyhead[R]{\footnotesize\color{tumgray} Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[L]{\footnotesize\color{tumgray} Ansys Fluent Setup \& TC1 Benchmark Tracking}
+\fancyfoot[R]{\footnotesize\color{tumgray} Chinmay S Patil}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+% --- Hyperref Setup ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=tumdarkblue,
+    urlcolor=tumblue,
+    citecolor=tumdarkblue,
+    pdftitle={Ansys Fluent Simulation Settings and TC1 Benchmark Tracking},
+    pdfauthor={Chinmay S Patil}
+}
+
+\begin{document}
+
+% ==============================================================================
+% TITLE BLOCK
+% ==============================================================================
+\begin{center}
+    {\LARGE\bfseries\color{tumdarkblue} Ansys Fluent Simulation Settings \& Benchmark Guide} \\[0.4em]
+    {\Large\color{tumblue} Transregio SFB-TR40 $\cdot$ Test Case 1: Single-Element GCH\textsubscript{4}/GOX Chamber} \\[0.6em]
+    {\normalsize\textbf{Author:} Chinmay S Patil \quad$\vert$\quad \textbf{Date:} \today} \\[0.3em]
+    {\footnotesize\color{tumgray} Lehrstuhl f\"ur Turbomaschinen und Flugantriebe (LFA) $\cdot$ Technische Universit\"at M\"unchen}
+\end{center}
+\vspace{-0.5em}
+\noindent\textcolor{tumblue}{\rule{\textwidth}{1.2pt}}
+\vspace{0.8em}
+
+% ==============================================================================
+\section{Executive Summary \& TC1 Benchmark Overview}
+% ==============================================================================
+This reference document tracks the physical modeling, numerical settings, meshing rules, and output requirements for the \textbf{Transregio SFB-TR40 Test Case 1 (TC1)} benchmark. The experimental campaign was conducted at the Lehrstuhl f\"ur Turbomaschinen und Flugantriebe (LFA) of the Technische Universit\"at M\"unchen (TUM) to provide high-fidelity validation data for numerical combustion models of gaseous oxygen (GOX) and gaseous methane (GCH\textsubscript{4}) rocket thrust chambers.
+
+\subsection{Chamber Architecture \& Injector Geometry}
+The chamber features a square bore with a single coaxial shear injector and a rectangular converging-diverging nozzle throat:
+\begin{itemize}\setlength\itemsep{0.18em}
+    \item \textbf{Chamber Bore:} Square cross section of $12\times12\text{ mm}$, composed of two segments: Segment 1 ($174\text{ mm}$) and Segment 2 ($145\text{ mm}$), yielding $319\text{ mm}$ of constant duct.
+    \item \textbf{Nozzle Section:} $20\text{ mm}$ converging section tapering to a rectangular throat ($4.8\text{ mm}$ height $\times$ $12.0\text{ mm}$ width), yielding a contraction ratio $\varepsilon = 2.5$ and chamber Mach number $\text{Ma} \approx 0.24$. The length from faceplate to throat is $303\text{ mm}$; total physical assembly length is $339\text{ mm}$.
+    \item \textbf{Coaxial Shear Injector:} Flush mounting with injection face (recess = $0\text{ mm}$). Central GOX core of $\varnothing 4.0\text{ mm}$ inner diameter with $0.5\text{ mm}$ post wall thickness. Surrounding GCH\textsubscript{4} annulus of $\varnothing 5.0\text{ mm}$ ID $\times \varnothing 6.0\text{ mm}$ OD.
+    \item \textbf{Torch Igniter:} Side wall mounted at $z \approx 130\text{ mm}$ from faceplate. Not geometrically modeled in CFD; ignition is numerically initiated via high-temperature/product patching.
+    \item \textbf{Thermal Construction:} Capacitively cooled oxygen-free copper (Cu-HCP: $\rho = 8940\text{ kg/m}^3$, $k = 385\text{ W/(m}\cdot\text{K)}$). Solved as a fixed non-uniform wall temperature problem, not conjugate heat transfer.
+\end{itemize}
+
+\subsection{Nominal Operating Conditions (Test \texttt{TFC-R-20-26-30-10})}
+The simulation corresponds to the hot-run evaluation window centered at $t_1 = 2.01\text{ s}$ averaged over $0.5\text{ s}$ of steady burn:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{L{4.5cm} Y L{4.5cm}}
+\toprule
+\textbf{Parameter} & \textbf{Full Domain Value} & \textbf{Quarter-Symmetry ($\div 4$)} \\
+\midrule
+Chamber Pressure ($P_c$) & $20.0\text{ bar}$ nominal & $20.0\text{ bar}$ \\
+Mixture Ratio ($O/F$) & $2.62$ & $2.62$ \\
+Total Mass Flow Rate ($\dot{m}_\text{tot}$) & $0.062\text{ kg/s}$ & $0.01550\text{ kg/s}$ \\
+Oxygen Mass Flow ($\dot{m}_\text{Ox}$) & $0.045\text{ kg/s}$ (feed: $26.4\text{ bar}, 278\text{ K}$) & $0.01125\text{ kg/s}$ \\
+Methane Mass Flow ($\dot{m}_{\text{CH}_4}$) & $0.017\text{ kg/s}$ (feed: $24.4\text{ bar}, 269\text{ K}$) & $0.00425\text{ kg/s}$ \\
+Porous Plate Pressure Drop & $\Delta P / P \approx 9\%\text{ (Ox)}, \; 11\%\text{ (CH}_4\text{)}$ & Accounts for inlet manifold drop \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{tcolorbox}[basebox, title={Critical Coordinate Origin Note (\texttt{Z\_OFFSET\_M})}]
+In the experimental Thermtest data (Table 9 of benchmark specification), the axial coordinate $z^{**} = 0$ is defined at the start of the first copper segment, which is located \textbf{$29\text{ mm}$ upstream of the injector faceplate}. When using a CAD/mesh where the faceplate is $z=0$, an axial offset of $\Delta z = 0.029\text{ m}$ must be applied:
+\[
+z_\text{Thermtest} = z_\text{mesh} + 0.029\text{ m}
+\]
+This explains the parameter \texttt{Z\_OFFSET\_M = 0.029} defined in the boundary UDFs.
+\end{tcolorbox}
+
+% ==============================================================================
+\section{Mandatory Deliverables (\S6 Benchmark Specification)}
+% ==============================================================================
+The benchmark specification explicitly requires five primary outputs for validation against experimental data:
+\begin{enumerate}\setlength\itemsep{0.35em}
+    \item \textbf{Axial Wall Pressure Distribution $p(z)$:} Profile along the side wall compared against the 9 calibrated piezoresistive transducers (\texttt{PC0} through \texttt{PC8}):
+    \begin{center}
+    \small
+    \begin{tabular}{lccccccccc}
+    \toprule
+    \textbf{Transducer} & PC0 & PC1 & PC2 & PC3 & PC4 & PC5 & PC6 & PC7 & PC8 \\
+    \midrule
+    $z^{**}\text{ [mm]}$ & 0.5 & 34.5 & 68.5 & 102.5 & 136.5 & 170.5 & 204.5 & 238.5 & 272.5 \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \item \textbf{Wall Heat Flux Profiles $\dot{q}_w(z)$:} Evaluated along the two prescribed thermocouple lines:
+    \begin{itemize}
+        \item Upper wall centerline: $T_\text{up}$ line ($x=0, y=+6\text{ mm}$).
+        \item Side wall centerline: $T_\text{side}$ line ($x=+6\text{ mm}, y=0$).
+    \end{itemize}
+    \item \textbf{2D Iso-Plots \& Planar Contours:} Mid-plane slices ($y=0$ plane) displaying temperature, velocity magnitude, and major species fields.
+    \item \textbf{Axial Product Mass Fraction Evolution:} Centerline profiles of major species (H\textsubscript{2}O, CO\textsubscript{2}, CO, H\textsubscript{2}, O\textsubscript{2}, CH\textsubscript{4}).
+    \item \textbf{Centerline OH Radical Profile:} Mass/mole fraction of OH along the chamber centerline, serving as the primary physical marker of the flame anchoring zone and reaction front length.
+\end{enumerate}
+
+% ==============================================================================
+\section{Computational Budget, Meshing Strategy \& Sizing Physics}
+% ==============================================================================
+
+\subsection{Project Phase Breakdown \& Time Estimates}
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{L{3.5cm} Y L{2.8cm}}
+\toprule
+\textbf{Project Phase} & \textbf{Scope of Work} & \textbf{Estimated Time} \\
+\midrule
+Geometry \& CAD & SpaceClaim fluid domain extraction, symmetry cuts, VOR bodies & 4--8 hours \\
+Meshing \& Sizing & Inflation layer setup, shear layer VOR, mesh quality checks & 4--8 hours \\
+Solver Configuration & Mechanism import, species properties, boundary UDFs, monitors & 4--8 hours \\
+CFD Calculation & Density-based coupled solving, flame stabilization, convergence & 1--2 days (wall clock) \\
+Post-Processing & Profile extraction (PC0--PC8, $T_\text{up}, T_\text{side}$), OH plots, reports & 4--6 hours \\
+\midrule
+\textbf{Total Active Effort} & \textbf{Hands-on modeling and verification} & \textbf{$\sim$15--25 hours} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Solver Runtime Scaling \& ETA Diagnostics (4 CPU Cores, 192,688 Nodes)}
+The current optimized mesh contains \textbf{192,688 nodes} ($\sim$150,000 cells), well below the Ansys Student 1M cap. 
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{L{4.5cm} L{3.5cm} L{3.0cm} Y}
+\toprule
+\textbf{State / Model} & \textbf{Time / Iteration} & \textbf{Iterations} & \textbf{Estimated Wall-Clock} \\
+\midrule
+Current Mesh (192k nodes, FR/ED stable) & $\sim$\textbf{0.8--1.5 s} / iter & 500 (batch) & \textbf{$\sim$8--12 minutes} \\
+Full Convergence (192k nodes, 16 sp) & $\sim$1.0--1.5 s / iter & 3,000--5,000 iters & \textbf{$\sim$45--75 minutes} \\
+EDC (Stiff ODE, 16 sp) & $\sim$10--20 s / iter & 4,000 iters & \textbf{$\sim$12--20 hours} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{tcolorbox}[alertbox, title={Why Fluent Displayed an Initial 44-Hour ETA (and Why It Drops)}]
+At iteration 10, Fluent reported an ETA of 44 hours (down from 203 hours at iteration 2). This initial inflation is caused by two temporary factors:
+\begin{enumerate}\setlength\itemsep{0.15em}
+    \item \textbf{Divergence Back-off Retries:} In each startup iteration, Fluent encountered divergence checks, triggering 3--4 sub-iterations stepping down from $10^{-6}\text{ s}$ to $2.47\times10^{-8}\text{ s}$. Each iteration effectively solved the coupled AMG equations four times.
+    \item \textbf{Disk I/O from 4 Animations Every Iteration:} Fluent was writing four graphic animation sequence files (\texttt{.cxa}) at every single iteration, adding multi-second graphics overhead.
+\end{enumerate}
+Once the flame anchors and the time step stabilizes without divergence retries, the iteration time drops to $\sim$1.0~second per iteration, completing 500 iterations in \textbf{under 12 minutes}.
+\end{tcolorbox}
+
+\subsection{Bodies of Influence (VOR) \& Mesh Sizing}
+To maintain mesh quality and resolve the shear layer without cell count explosion, four Body of Influence (BOI / VOR) volumes are defined in CAD:
+\begin{table}[htbp]
+	\centering
+	\small
+	\begin{tabularx}{\textwidth}{L{3.8cm} L{2.5cm} Y}
+		\toprule
+		\textbf{Region / Body} & \textbf{Element Size} & \textbf{Physical Purpose} \\
+		\midrule
+		\texttt{inletVOR} & $0.60\text{ mm}$ & Resolves GOX post lip ($0.5\text{ mm}$ wall) and methane annular jet \\
+		\texttt{shearLayerVOR} & $0.60\text{ mm}$ & Captures turbulent mixing layer and flame anchoring zone \\
+		\texttt{convergentVOR} & $2\text{ mm}$ & Resolves accelerating flow into nozzle contraction \\
+		\texttt{nozzleVOR} & $1.2\text{ mm}$ & Resolves transonic acceleration and sonic throat shock structure \\
+		Chamber Bulk Duct & $3.00\text{ mm}$ & Coarse structured/swept hex mesh away from core shear layer \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+\begin{tcolorbox}[basebox, title={SpaceClaim / Meshing Rule for VORs}]
+In the CAD tree, \textbf{Suppress} all four VOR bodies (\texttt{inletVOR}, \texttt{shearLayerVOR}, etc.). Suppressed bodies remain selectable as geometry scopes for \emph{Mesh $\to$ Insert $\to$ Sizing $\to$ Body of Influence}, but will \textbf{not} be meshed as separate fluid volumes or exported to Fluent.
+\end{tcolorbox}
+
+\subsection{Near-Wall Resolution: Smooth Transition Inflation (Max 8 Layers)}
+While theoretical viscous sublayer resolution ($y^+ \approx 1$) yields an initial cell height $y_1 \approx 0.15\,\mu\text{m}$, directly prescribing $0.15\,\mu\text{m}$ onto a coarser chamber duct creates extreme aspect ratios ($>10^4$) and high cell skewness, severely destabilizing the density-based coupled solver.
+
+\textbf{Adopted Setup: Smooth Transition, Maximum 8 Layers}
+\begin{itemize}\setlength\itemsep{0.18em}
+    \item \textbf{Transition Scheme:} Smooth Transition with a transition ratio of $0.272$ and growth rate of $1.20$.
+    \item \textbf{Maximum Layers:} 8 layers, maintaining healthy cell aspect ratios ($<100$) adjacent to duct faces.
+    \item \textbf{Resulting Mesh Size:} Total node count stands at \textbf{192,688 nodes} ($\sim$150,000 cells), providing a robust balance between wall gradient capture and numerical stability.
+    \item \textbf{Turbulence Wall Treatment:} SST $k$-$\omega$ automatically blends from resolved to analytical sublayer profiles across cells where $1 < y^+ < 10$.
+\end{itemize}
+
+% ==============================================================================
+\section{Combustion Chemistry \& Reaction Mechanism Selection}
+% ==============================================================================
+
+\subsection{GRI-Mech 3.0 Memory Failure Rationale}
+Full GRI-Mech 3.0 contains 53 species and 325 elementary reactions. In Ansys Fluent's density-based coupled solver, each cell solves a coupled Algebraic Multigrid (AMG) system across all transported variables simultaneously:
+\[
+N_\text{coupled} = 5 \text{ (continuity, 3-momentum, energy)} + 2 \text{ (SST } k\text{-}\omega\text{)} + (N_\text{species} - 1) \approx 59\text{ equations/cell}
+\]
+Memory allocation scales quadratically with equation count ($O(N_\text{coupled}^2)$). On a 1M cell mesh, GRI-Mech 3.0 requires $>25\text{ GB}$ of RAM simply to build the AMG matrix during hybrid initialization, causing immediate allocation failures on typical workstation hardware.
+
+\subsection{Selection of 16-Species Reduced Mechanism}
+\begin{itemize}\setlength\itemsep{0.18em}
+    \item \textbf{Why Built-in Global Mechanisms Fail:} Fluent's default 2-step and 4-step methane mechanisms track only 5 species (CH\textsubscript{4}, O\textsubscript{2}, CO\textsubscript{2}, H\textsubscript{2}O, N\textsubscript{2}). They do \emph{not} track the OH radical, making the mandatory \S6 benchmark deliverable impossible to extract.
+    \item \textbf{Chosen Mechanism (\texttt{gri16\_reduced.inp}):} A 16-species skeletal mechanism (60 reactions) retaining essential radicals:
+    \begin{center}
+    H\textsubscript{2}, \; H, \; O, \; O\textsubscript{2}, \; OH, \; H\textsubscript{2}O, \; HO\textsubscript{2}, \; H\textsubscript{2}O\textsubscript{2}, \; CH\textsubscript{3}, \; CH\textsubscript{4}, \; CO, \; CO\textsubscript{2}, \; HCO, \; CH\textsubscript{2}O, \; N\textsubscript{2}, \; AR
+    \end{center}
+    \item \textbf{Inert Stripping:} Since propellants are pure GOX and pure GCH\textsubscript{4}, N\textsubscript{2} and AR can be deactivated from transport to save memory.
+    \item \textbf{Alternative Non-Premixed (Flamelet) Model:} If runtime memory is constrained, the Non-Premixed Combustion model solves only 2 transport equations (mixture fraction $f$ and variance $f'^2$), retrieving OH from an offline pre-tabulated chemistry library.
+\end{itemize}
+
+% ==============================================================================
+\section{Ansys Fluent Detailed Simulation Settings}
+% ==============================================================================
+
+\subsection{General \& Physical Models}
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Solver Type & Density-Based, Steady state \\
+Velocity Formulation & Absolute \\
+2D / 3D Space & 3D (or Quarter-Symmetry 3D) \\
+Energy Equation & \textbf{On} \\
+Viscous Model & SST $k$-$\omega$ (Shear Stress Transport) \\
+Viscous Options & \textbf{Low-Re Corrections} enabled ($y^+ \approx 1$ mesh); default blending constants \\
+Species Model & Species Transport \\
+Reactions & \textbf{Volumetric} enabled \\
+Combustion Model & Finite-Rate / Eddy-Dissipation (Turbulence-Chemistry interaction) \\
+Model Constants & $A = 4.0$, $B = 0.5$ (standard Magnussen constants) \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Materials \& Chemistry Properties (\texttt{chemkin-import})}
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Mixture Material & \texttt{chemkin-import} (File: \texttt{gri16\_reduced (1).inp}, 16 species, 43 reactions) \\
+Species List & H\textsubscript{2}, H, O, O\textsubscript{2}, OH, H\textsubscript{2}O, HO\textsubscript{2}, H\textsubscript{2}O\textsubscript{2}, CH\textsubscript{3}, CH\textsubscript{4}, CO, CO\textsubscript{2}, HCO, CH\textsubscript{2}O, N\textsubscript{2}, AR \\
+Density Method & \texttt{ideal-gas} (mandatory for compressible density-based solver) \\
+$c_p$ (Specific Heat) & \texttt{mixing-law} \\
+Thermal Conductivity & \texttt{mass-weighted-mixing-law} \\
+Dynamic Viscosity & \texttt{mass-weighted-mixing-law} \\
+Mass Diffusivity & \texttt{constant-dilute-approx} \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Cell Zone Conditions (Fluid Domain)}
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Zone Name & \texttt{fluid} \\
+Material Name & \texttt{chemkin-import} \\
+Reaction & Volumetric reactions enabled with imported mechanism \\
+Laminar Flame Speed & Disabled (diffusion/shear flame) \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Boundary Conditions}
+
+\subsubsection*{1. Oxidizer Inlet (\texttt{gox\_inlet}) -- Mass-Flow Inlet}
+
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Mass Flow Rate & $0.045\text{ kg/s}$ (Full domain) \\
+Total Temperature & $278.0\text{ K}$ \\
+Direction Specification & Normal to Boundary \\
+Species Mass Fraction & $\text{O}_2 = 1.0$, all other species = $0.0$ \\
+Turbulence Specification & Intensity $5\%$, Viscosity Ratio $10 \%$ \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection*{2. Fuel Inlet (\texttt{gch4\_inlet}) -- Mass-Flow Inlet}
+
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Mass Flow Rate & $0.017\text{ kg/s}$ (Full domain) \\
+Total Temperature & $269.0\text{ K}$ \\
+Direction Specification & Normal to Boundary \\
+Species Mass Fraction & $\text{CH}_4 = 1.0$, all other species = $0.0$ \\
+Turbulence Specification & Intensity $5\%$, Viscosity Ratio $10 \%$ \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection*{3. Nozzle Exit (\texttt{outlet}) -- Pressure Outlet}
+
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Gauge Static Pressure & $1.0\text{ bar}$ (Exit flow chokes upstream at the $4.8\times 12\text{ mm}$ throat; exit back-pressure has negligible upstream influence) \\
+Backflow Total Temperature & $300.0\text{ K}$ \\
+Backflow Species & Products ($\text{CO}_2 = 0.1$, $\text{H}_2\text{O} = 0.1$) \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection*{4. Upper/Lower Chamber Walls (\texttt{wall\_top\_bottom}) -- Thin Wall}
+
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Wall Material & \textbf{Aluminum} (active setup; copper Cu-HCP in physical hardware) \\
+Thermal Boundary Condition & \textbf{Temperature} (Dirichlet condition; interface $T$ enforced via UDF) \\
+Temperature Formulation & User-Defined Function: \texttt{udf chamber\_top\_T} \\
+Wall Motion / Shear & Stationary Wall, No-Slip condition \\
+Wall Thickness / Heat Gen & Thickness = $0.0\text{ mm}$, Heat Generation = $0.0\text{ W/m}^3$ \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection*{5. Side Chamber Walls (\texttt{wall\_sides}) -- Thick Wall}
+
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Thermal Boundary Condition & \textbf{Temperature} \\
+Temperature Formulation & User-Defined Function: \texttt{udf chamber\_side\_T} \\
+Wall Motion / Shear & Stationary Wall, No-Slip condition \\
+Wall Thickness / Heat Gen & Thickness = $0.0\text{ mm}$, Heat Generation = $0.0\text{ W/m}^3$ \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection*{6. Wall Temperature UDF (\texttt{chamber\_wall\_temperatures.c})}
+
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Source File & \texttt{chamber\_wall\_temperatures.c} (Compiled UDF library) \\
+Profiles Exported & \texttt{chamber\_top\_T} (Upper wall) and \texttt{chamber\_side\_T} (Side wall) \\
+\texttt{Z\_OFFSET\_M} Parameter & $0.029\text{ m}$ (for faceplate origin) \quad$\vert$\quad $0.0\text{ m}$ (if origin at segment 1) \\
+Interpolation Rule & Linear spline through Thermtest 10 mm measurement coordinates \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Surfaces \& Monitoring Probes}
+\begin{tabularx}{\textwidth}{L{4.8cm} Y}
+\toprule
+\textbf{Surface Name} & \textbf{Type \& Geometric Coordinates} \\
+\midrule
+\texttt{pc0} through \texttt{pc8} & Point surfaces located on side wall ($x \approx 6.0\text{ mm}, y \approx 0.0\text{ mm}$): \newline $z = 0.5, 34.5, 68.5, 102.5, 136.5, 170.5, 204.5, 238.5, 272.5\text{ mm}$ \\
+\texttt{centerline\_till\_throat} & Line / rake from injector faceplate ($0,0,0$) to throat ($0,0,303\text{ mm}$) along axis \\
+\texttt{plane\_y0} & Planar surface at $y = 0$ for mid-plane contour visualization \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Cell Registers \& Ignition Patching}
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Register Name & \texttt{injector} \\
+Geometric Shape & Sphere \\
+Sphere Center & $(x=0.0\text{ m}, \; y=0.0\text{ m}, \; z=0.005\text{ m})$ \\
+Sphere Radius & $0.005\text{ m}$ ($5.0\text{ mm}$, enveloping the near-injector shear layer) \\
+Patch Temperature & \textbf{$2500\text{ K}$} \\
+Patch Species & \textbf{$\text{H}_2\text{O} \approx 0.20, \quad \text{CO}_2 \approx 0.15, \quad \text{OH} \approx 0.01$} \\
+Patch Sequence & \textbf{Mandatory immediately after Hybrid Init, before Calculate} \\
+\bottomrule
+\end{tabularx}
+
+\begin{tcolorbox}[alertbox, title={Why Product Species Patching is Mandatory for Combustion}]
+In the Finite-Rate / Eddy-Dissipation combustion model, the turbulent combustion rate is strictly limited by the product concentration:
+\[
+R_\text{ED} = A \cdot \rho \frac{\varepsilon}{k} \min \left( [Reactants], \; B \sum \frac{Y_\text{Products}}{M_{w,\text{Products}}} \right)
+\]
+If product species are \textbf{not patched} ($Y_\text{Products} = 0$), the Eddy-Dissipation reaction rate is \textbf{identically zero}. Furthermore, because the feed streams enter cold (CH\textsubscript{4} at 269~K, O\textsubscript{2} at 278~K), finite-rate autoignition does not occur without initial radical carriers. The flame will \textbf{never ignite}, and the hot temperature patch simply blows out or diffuses away, causing unburned shear-layer divergence.
+\end{tcolorbox}
+
+\subsection{Solution Numerical Methods}
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Formulation & Implicit \\
+Flux Type & \textbf{AUSM} (switched from Roe-FDS after persistent pressure clipping and divergence retries at startup) \\
+Gradient Spatial Scheme & Least Squares Cell Based \\
+Flow & First Order Upwind \\
+Turbulent Kinetic Energy & First Order Upwind \\
+Specific Dissipation Rate & First Order Upwind \\
+Species Transport Equations & First Order Upwind \\
+Pseudo Time Method & Global Time Step \\
+Warped-Face Gradient Correction & \textbf{On} (Enable checkbox to stabilize high-aspect inflation cells) \\
+Solution Limits (\texttt{Controls}) & $P_\text{min} = 10{,}000\text{ Pa}$, $P_\text{max} = 5\times 10^6\text{ Pa}$, $T_\text{min} = 250\text{ K}$, $T_\text{max} = 3500\text{ K}$ \\
+High Order Term Relaxation & \textbf{Off} during 1st order; \textbf{On} when switching to 2nd order \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Run Calculation Parameters}
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Parameter} & \textbf{Selected Setting / Value} \\
+\midrule
+Time Scale Factor & \textbf{0.02} \\
+Time Step Method & \textbf{Automatic} \\
+Length Scale Method & \textbf{Conservative} \\
+Number of Iterations & \textbf{150} \\
+Reporting Interval & \textbf{10} iteration \\
+Reporting Interval (Graphs) & \textbf{1} iteration \\
+Profile Update Interval & \textbf{1} iteration \\
+Solution Steering & \textbf{Off} \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Report Definitions \& Convergence Monitors}
+\begin{tabularx}{\textwidth}{L{5.8cm} Y}
+\toprule
+\textbf{Monitor Name} & \textbf{Definition \& Purpose} \\
+\midrule
+\texttt{cfl-number} & Courant-Friedrichs-Lewy monitor to track time-stepping stability \\
+\texttt{total\_heat\_flux\_top\_bottom} & Surface Integral $\to$ Total Surface Heat Flux on \texttt{wall\_top\_bottom} \\
+\texttt{total\_heat\_flux\_side} & Surface Integral $\to$ Total Surface Heat Flux on \texttt{wall\_sides} \\
+\texttt{static\_pressure\_at\_left\_wall} & Surface Facet Average $\to$ Static Pressure monitor \\
+\texttt{oh\_centerline\_monitor} & Vertex Average $\to$ Mass fraction of OH along \texttt{centerline\_till\_throat} \\
+\texttt{mass\_flow\_balance} & Net flux monitor ($\dot{m}_\text{in} - \dot{m}_\text{out}$), settles near $0.0\text{ kg/s}$ at convergence \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Calculation Activities \& Solution Animations}
+\begin{tabularx}{\textwidth}{L{4.5cm} Y}
+\toprule
+\textbf{Activity} & \textbf{Execution Frequency / Details} \\
+\midrule
+Autosave Case \& Data & Write every $200$--$500$ iterations with automatic incrementing filename \\
+Centerline Animations & Record every \textbf{10--25 iterations} (writing every 1 iter throttles I/O) \\
+Animation Objects & \texttt{o2-center}, \texttt{velo-center}, \texttt{temp-center}, \texttt{ch4-center} on mid-plane \\
+Execute Commands & Unused / Default \\
+Cell Register Operations & Unused / Default \\
+\bottomrule
+\end{tabularx}
+
+% ==============================================================================
+\section{Action Checklist \& Verification Protocol}
+% ==============================================================================
+Use the checklist below to verify settings during simulation setup and post-processing. Settings can be adapted or commented out as needed:
+
+\begin{tcolorbox}[basebox, title={Pre-Run Verification Checklist}]
+\begin{itemize}\setlength\itemsep{0.3em}
+    \item[\checkmark] \textbf{Mechanism Validation:} Confirm \texttt{Number of Volumetric Species = 16} in the Materials panel. Ensure OH is included.
+    \item[\checkmark] \textbf{Quarter-Domain Mass Flows:} If running quarter symmetry, verify mass flows are scaled ($\dot{m}_\text{Ox} = 0.01125\text{ kg/s}$, $\dot{m}_{\text{CH}_4} = 0.00425\text{ kg/s}$).
+    \item[\checkmark] \textbf{Symmetry Planes Tagged:} Ensure the cut planes ($X=0$ and $Y=0$) are set to \texttt{symmetry}, not default \texttt{wall}.
+    \item[\checkmark] \textbf{Ignition Patch Executed:} After Hybrid Initialization, immediately patch sphere \texttt{injector} with $T = 2500\text{ K}$ and product species before pressing Calculate.
+    \item[\checkmark] \textbf{UDF Origin Offset Checked:} Verify that \texttt{Z\_OFFSET\_M} matches mesh coordinate origin ($0.029\text{ m}$ if origin is at faceplate).
+    \item[\checkmark] \textbf{Discretization Ramp:} Begin iterations with 1st Order Upwind. Once flame anchors and residuals stabilize, switch Flow, Turbulence, and Species to 2nd Order Upwind with High Order Term Relaxation enabled.
+\end{itemize}
+\end{tcolorbox}
+
+% ------------------------------------------------------------------------------
+% LaTeX Comment Block for Active / Inactive Simulation Items
+% Uncomment or modify items below in TeXstudio as your study progresses:
+%
+% [ ] Case 1: Baseline 16-species Finite-Rate/Eddy-Dissipation run
+% [ ] Case 2: DRM19 skeletal mechanism comparison (with N2/Ar stripped)
+% [ ] Case 3: High-order discretization convergence check (residuals < 1e-4)
+% [ ] Case 4: Wall heat flux validation vs. Table 9 Thermtest data
+% [ ] Case 5: Static pressure validation vs. Table 8 PC0-PC8 readings
+% [ ] Case 6: Centerline OH concentration extraction for flame front comparison
+% ------------------------------------------------------------------------------
+
+\end{document}

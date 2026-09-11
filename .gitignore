@@ -28,6 +28,10 @@ TUMCFDPr2026-20260903T045809Z-1-001.zip
 
 simFile2/
 
-simFile/
+# simFile/
+
+try2*
+
+scripts/
 
 solver/
